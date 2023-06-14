@@ -2,7 +2,7 @@ import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
 
-export const main = handler(async () => {
+export const main = handler(async (event: any) => {
   const params = {
     TableName: Table.Notes.tableName,
     // 'KeyConditionExpression' defines the condition for the query
@@ -12,7 +12,7 @@ export const main = handler(async () => {
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be the id of the author
     ExpressionAttributeValues: {
-      ":userId": "123",
+      ":userId": event.requestContext.authorizer.iam.cognitoIdentity.identityId,
     },
   };
 
