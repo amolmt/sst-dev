@@ -1,9 +1,18 @@
 import { StackContext, Table, Bucket } from "sst/constructs";
 
 export function StorageStack({ stack, app }: StackContext) {
-    // Create an S3 bucket
-    const bucket = new Bucket(stack, "Uploads");
-    
+  // Create an S3 bucket
+  const bucket = new Bucket(stack, "Uploads", {
+    cors: [
+      {
+        maxAge: "1 day",
+        allowedOrigins: ["*"],
+        allowedHeaders: ["*"],
+        allowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
+      },
+    ],
+  });
+
   // Create the DynamoDB table
   const table = new Table(stack, "Notes", {
     fields: {
@@ -14,7 +23,7 @@ export function StorageStack({ stack, app }: StackContext) {
   });
 
   return {
-      table,
-      bucket
+    table,
+    bucket,
   };
 }
