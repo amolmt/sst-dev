@@ -17,5 +17,9 @@ export default {
       .stack(ApiStack)
       .stack(AuthStack)
       .stack(FrontendStack);
+
+    if (app.stage !== "prod") {
+      app.setDefaultRemovalPolicy("destroy");
+    }
   },
 } satisfies SSTConfig;
