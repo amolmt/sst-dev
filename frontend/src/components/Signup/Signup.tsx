@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../lib/contextLib";
-import { useFormFields } from "../lib/hooksLib";
-import { onError } from "../lib/errorLib";
+import LoaderButton from "../LoaderButton/LoaderButton";
+import { useAppContext } from "../../lib/contextLib";
+import { useFormFields } from "../../lib/hooksLib";
+import { onError } from "../../lib/errorLib";
 import "./Signup.css";
 import { Auth } from "aws-amplify";
 
@@ -16,7 +16,7 @@ export default function Signup() {
     confirmationCode: "",
   });
   const nav = useNavigate();
-  const [newUser, setNewUser] = useState(null);
+  const [newUser, setNewUser] = useState<any>(null);
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Signup() {
     return fields.confirmationCode.length > 0;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
     setIsLoading(true);
     try {
@@ -48,7 +48,7 @@ export default function Signup() {
     }
   }
 
-  async function handleConfirmationSubmit(event) {
+  async function handleConfirmationSubmit(event: any) {
     event.preventDefault();
     setIsLoading(true);
     try {
@@ -65,7 +65,7 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
+        <Form.Group controlId="confirmationCode">
           <Form.Label>Confirmation Code</Form.Label>
           <Form.Control
             autoFocus
@@ -92,7 +92,7 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
+        <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -101,7 +101,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="password" size="lg">
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -109,7 +109,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
+        <Form.Group controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../lib/contextLib";
-import { useFormFields } from "../lib/hooksLib";
-import { onError } from "../lib/errorLib";
+import LoaderButton from "../LoaderButton/LoaderButton";
+import { useAppContext } from "../../lib/contextLib";
+import { useFormFields } from "../../lib/hooksLib";
+import { onError } from "../../lib/errorLib";
 import "./Login.css";
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
     return fields.email.length > 0 && fields.password.length > 0;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
 
     setIsLoading(true);
@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
+        <Form.Group controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -48,7 +48,7 @@ export default function Login() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group size="lg" controlId="password">
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"

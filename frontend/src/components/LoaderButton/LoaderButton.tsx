@@ -4,7 +4,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import "./LoaderButton.css";
 
 export default function LoaderButton({
-  isLoading,
+  isLoading = false,
   className = "",
   disabled = false,
   ...props
